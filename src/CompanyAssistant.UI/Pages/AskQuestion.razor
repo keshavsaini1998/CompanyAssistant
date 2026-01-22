@@ -1,0 +1,51 @@
+﻿@page "/ask"
+@inject HttpClient Http
+
+<MudPaper Class="pa-4 mx-auto mt-4" Style="max-width:600px;">
+    <MudText Typo="Typo.h5">Ask a Question</MudText>
+
+    <MudTextField @bind-Value="Question" Label="Enter your question" FullWidth="true" />
+
+    <MudButton OnClick="SubmitQuestion" Variant="Variant.Filled" Color="Color.Primary" Disabled="@string.IsNullOrWhiteSpace(Question)">
+        Ask
+    </MudButton>
+
+    @if (!string.IsNullOrWhiteSpace(Answer))
+    {
+        <MudText Typo="Typo.body1" Class="mt-4"><b>Answer:</b> @Answer</MudText>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(StatusMessage))
+    {
+        <MudText Typo="Typo.body2" Class="mt-2">@StatusMessage</MudText>
+    }
+</MudPaper>
+
+@code {
+    private string Question = "";
+    private string Answer = "";
+    private string StatusMessage = "";
+
+    private async Task SubmitQuestion()
+    {
+        try
+        {
+            var payload = new { query = Question };
+            var response = await Http.PostAsJsonAsync("https://localhost:7128/api/ask", payload);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Answer = await response.Content.ReadAsStringAsync();
+                StatusMessage = "";
+            }
+            else
+            {
+                StatusMessage = $"Error: {response.StatusCode}";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Exception: {ex.Message}";
+        }
+    }
+}

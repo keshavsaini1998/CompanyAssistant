@@ -1,0 +1,11 @@
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\bin\Debug\net8.0\CompanyAssistant.Domain.deps.json
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\bin\Debug\net8.0\CompanyAssistant.Domain.dll
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\bin\Debug\net8.0\CompanyAssistant.Domain.pdb
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.AssemblyInfoInputs.cache
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.AssemblyInfo.cs
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.csproj.CoreCompileInputs.cache
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.dll
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\refint\CompanyAssistant.Domain.dll
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\CompanyAssistant.Domain.pdb
+D:\Keshav\AI\CompanyAssistant\src\CompanyAssistant.Domain\obj\Debug\net8.0\ref\CompanyAssistant.Domain.dll

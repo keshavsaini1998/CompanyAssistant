@@ -1,0 +1,54 @@
+﻿@page "/upload"
+@inject HttpClient Http
+@using System.Net.Http.Headers
+
+<MudPaper Class="pa-4 mx-auto mt-4" Style="max-width:600px;">
+    <MudText Typo="Typo.h5">Upload Document</MudText>
+
+    <MudTextField @bind-Value="TenantId" Label="Tenant ID" FullWidth="true" />
+    <MudTextField @bind-Value="Role" Label="Role" FullWidth="true" />
+
+    <InputFile OnChange="OnFileSelected" />
+
+    <MudButton OnClick="UploadFile" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!IsFileSelected)">
+        Upload
+    </MudButton>
+
+    <MudText Typo="Typo.body2">@StatusMessage</MudText>
+</MudPaper>
+
+@code {
+    private IBrowserFile? SelectedFile;
+    private string TenantId = "";
+    private string Role = "";
+    private string StatusMessage = "";
+    private bool IsFileSelected => SelectedFile != null;
+
+    private void OnFileSelected(InputFileChangeEventArgs e)
+    {
+        SelectedFile = e.File;
+        StatusMessage = SelectedFile != null ? $"Selected: {SelectedFile.Name}" : "";
+    }
+
+    private async Task UploadFile()
+    {
+        if (SelectedFile == null) return;
+
+        try
+        {
+            var content = new MultipartFormDataContent();
+            var streamContent = new StreamContent(SelectedFile.OpenReadStream(10 * 1024 * 1024));
+            streamContent.Headers.ContentType = new MediaTypeHeaderValue(SelectedFile.ContentType);
+            content.Add(streamContent, "file", SelectedFile.Name);
+            content.Add(new StringContent(TenantId), "tenantId");
+            content.Add(new StringContent(Role), "role");
+
+            var response = await Http.PostAsync("https://localhost:7128/api/documents/upload", content);
+            StatusMessage = response.IsSuccessStatusCode ? "Upload successful!" : $"Error: {response.StatusCode}";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Exception: {ex.Message}";
+        }
+    }
+}
