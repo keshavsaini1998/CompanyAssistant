@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Keshav\\AI\\CompanyAssistant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 34,
+          "SelectedChildIndex": 33,
           "Children": [
             {
               "$type": "Bookmark",
@@ -154,7 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Layout\\NavMenu.razor",
@@ -167,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",

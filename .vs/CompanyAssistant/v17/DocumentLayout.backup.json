@@ -3,40 +3,12 @@
   "WorkspaceRootPath": "D:\\Keshav\\AI\\CompanyAssistant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\pages\\uploaddocument.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\pages\\uploaddocument.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\pages\\askquestion.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\pages\\askquestion.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|d:\\keshav\\ai\\companyassistant\\src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{00CF21B9-8455-4F2F-A57F-2A802AE6FFF0}|src\\CompanyAssistant.UI\\CompanyAssistant.UI.csproj|solutionrelative:src\\companyassistant.ui\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 33,
+          "SelectedChildIndex": 34,
           "Children": [
             {
               "$type": "Bookmark",
@@ -182,98 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\wwwroot\\index.html",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\wwwroot\\index.html",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\wwwroot\\index.html",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\wwwroot\\index.html",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-01-22T23:23:19.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Program.cs",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Program.cs",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Program.cs",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-22T23:19:28.906Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\_Imports.razor",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\_Imports.razor",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\_Imports.razor",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-22T23:07:58.873Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Home.razor",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\Home.razor",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Pages\\Home.razor",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\Home.razor",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-22T22:48:18.347Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.razor",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\App.razor",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\App.razor",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\App.razor",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\App.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-22T22:46:59.535Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AskQuestion.razor",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\AskQuestion.razor",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Pages\\AskQuestion.razor",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\AskQuestion.razor",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\Pages\\AskQuestion.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-22T22:46:16.219Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UploadDocument.razor",
-              "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\UploadDocument.razor",
-              "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Pages\\UploadDocument.razor",
-              "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Pages\\UploadDocument.razor",
-              "RelativeToolTip": "src\\CompanyAssistant.UI\\Pages\\UploadDocument.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-22T22:45:20.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Layout\\NavMenu.razor",
@@ -286,13 +167,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",
               "ToolTip": "D:\\Keshav\\AI\\CompanyAssistant\\src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",
               "RelativeToolTip": "src\\CompanyAssistant.UI\\Layout\\MainLayout.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-01-22T22:41:52.087Z",
               "EditorCaption": ""
