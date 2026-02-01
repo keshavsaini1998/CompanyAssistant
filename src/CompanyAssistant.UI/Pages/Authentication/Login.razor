@@ -1,0 +1,172 @@
+﻿@page "/login"
+@using System.Text.RegularExpressions
+@using CompanyAssistant.UI.Auth
+@using CompanyAssistant.UI.Constants
+@using CompanyAssistant.UI.Models
+@using Microsoft.Extensions.Localization
+@using System.ComponentModel.DataAnnotations
+@using System.Security.Claims
+@inject JwtAuthenticationStateProvider AuthProvider
+
+@inject IJSRuntime JS
+@inherits OwningComponentBase
+@implements IDisposable
+
+
+
+<PageTitle>@Title</PageTitle>
+<AuthorizeView>
+    <NotAuthorized Context="Auth">
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudText Align="Align.Center" Typo="Typo.h4">
+                        Sign In
+                    </MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string"
+                                  @bind-Value="model.Username" For="@(() => model.Username)"
+                                  Label="User Name"
+                                  Variant="Variant.Outlined"
+                                  Required="true"
+                                  RequiredError="user name is required!"
+                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Person"></MudTextField>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="model.Password" For="@(() => model.Password)"
+                                  Label="Password"
+                                  Variant="Variant.Outlined"
+                                  InputType="@PasswordInput"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@PasswordInputIcon"
+                                  Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))"
+                                  Required="true"
+                                  RequiredError="Password is required!"
+                                  OnAdornmentClick="TogglePasswordVisibility" />
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Tertiary"
+                               Size="Size.Large"
+                               ButtonType="ButtonType.Submit"
+                               FullWidth="true">
+                        @if (_loading)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                            <MudText Class="ms-2"> @PromptText.LOADING</MudText>
+                        }
+                        else
+                        {
+                            <MudText>@ButtonText.SIGNIN</MudText>
+                        }
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+
+        </EditForm>
+    </NotAuthorized>
+    <Authorized>
+        <RedirectToHome></RedirectToHome>
+        <MudAlert Severity="MudBlazor.Severity.Info" Class="mt-8 mud-width-full" Style="max-width:500px;">You are already logged in.</MudAlert>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private string Title = "Sign In";
+    LoginFormModel model = new LoginFormModel()
+    {
+        Username = "administrator",
+        Password = "Password123!"
+    };
+
+
+    bool PasswordVisibility;
+    bool _loading;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Title = "Sign In";
+    }
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (pw.Length < 6)
+            yield return "Password must be at least of length 6";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+
+        //if (!Regex.IsMatch(pw, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"))
+        //    yield return L["Password should contain  atleast one uppercase/Lowercase and Special Character. Not only given Special Characters. It should be any like _$%#@"];
+    }
+
+    void TogglePasswordVisibility()
+    {
+        @if (PasswordVisibility)
+        {
+            PasswordVisibility = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            PasswordVisibility = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    private async Task OnValidSubmit(EditContext context)
+    {
+        try
+        {
+            _loading = true;
+            if (context.Validate())
+            {
+                if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Password))
+                {
+                    Snackbar.Add("Please enter both username and password.", MudBlazor.Severity.Error);
+                    return;
+                }
+                using (var client = new HttpClient())
+                {
+                    var url = $"{Setting.BaseUrl}{APIs.LoginUrl}";
+                    var response = await client.PostAsJsonAsync(url, model);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        Snackbar.Add("Invalid credentials",
+                            MudBlazor.Severity.Error);
+                        return;
+                    }
+
+                    var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                    await AuthProvider.SignInAsync(result!.Token);
+                    Snackbar.Add("Logged in", MudBlazor.Severity.Success);
+
+                    Navigation.NavigateTo("/", true);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("Something went wrong", MudBlazor.Severity.Error);
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

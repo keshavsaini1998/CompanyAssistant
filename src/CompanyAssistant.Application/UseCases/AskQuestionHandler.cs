@@ -25,34 +25,34 @@ namespace CompanyAssistant.Application.UseCases
             _chat = chat;
         }
 
-        public async Task<string> HandleAsync(AskQuestionQuery query)
-        {
-            var qVector = await _embed.EmbedAsync(query.Question);
+//        public async Task<string> HandleAsync(AskQuestionQuery query)
+//        {
+//            var qVector = await _embed.EmbedAsync(query.Question);
 
-            var chunkIds = await _vector.SearchAsync(
-                qVector,
-                query.TenantId,
-                topK: 5);
+//            var chunkIds = await _vector.SearchAsync(
+//                qVector,
+//                query.TenantId,
+//                topK: 5);
 
-            var chunks = await _repo.GetAuthorizedChunksAsync(
-                chunkIds,
-                query.Role);
+//            var chunks = await _repo.GetAuthorizedChunksAsync(
+//                chunkIds,
+//                query.Role);
 
-            if (!chunks.Any())
-                return "I don't know";
+//            if (!chunks.Any())
+//                return "I don't know";
 
-            var prompt = $"""
-You are a company assistant.
-Answer ONLY from the context below.
+//            var prompt = $"""
+//You are a company assistant.
+//Answer ONLY from the context below.
 
-Context:
-{string.Join("\n---\n", chunks)}
+//Context:
+//{string.Join("\n---\n", chunks)}
 
-Question:
-{query.Question}
-""";
+//Question:
+//{query.Question}
+//""";
 
-            return await _chat.AskAsync(prompt);
-        }
+//            return await _chat.AskAsync(prompt);
+//        }
     }
 }

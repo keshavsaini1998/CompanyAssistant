@@ -1,9 +1,11 @@
 ﻿using CompanyAssistant.Application.Interfaces;
 using CompanyAssistant.Application.UseCases;
-using CompanyAssistant.Infrastructure.Db;
+using CompanyAssistant.Application.UseCases.Commands.Auth;
 using CompanyAssistant.Infrastructure.FileProcessing;
 using CompanyAssistant.Infrastructure.Identity;
+using CompanyAssistant.Infrastructure.Identity.Jwt;
 using CompanyAssistant.Infrastructure.Ollama;
+using CompanyAssistant.Infrastructure.Persistence;
 using CompanyAssistant.Infrastructure.Vector;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -29,6 +31,17 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorClient", policy =>
+    {
+        policy
+            .WithOrigins("https://localhost:7074")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 // =======================================================
 // AUTHENTICATION (JWT)
@@ -59,6 +72,7 @@ builder.Services.AddHttpClient();
 // --------------------
 // Swagger 
 // --------------------
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -97,6 +111,8 @@ builder.Services.AddSwaggerGen(c =>
 // --------------------
 // Infrastructure → Application interface bindings
 // --------------------
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IEmbeddingService, OllamaEmbeddingService>();
 builder.Services.AddScoped<IChatService, OllamaChatService>();
 builder.Services.AddScoped<IVectorStore, QdrantVectorStore>();
@@ -107,6 +123,7 @@ builder.Services.AddScoped<IDocumentRepository, EfDocumentRepository>();
 // --------------------
 builder.Services.AddScoped<UploadDocumentHandler>();
 builder.Services.AddScoped<AskQuestionHandler>();
+builder.Services.AddScoped<LoginCommandHandler>();
 
 var app = builder.Build();
 
@@ -123,7 +140,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors("BlazorClient");
+
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -131,29 +151,51 @@ app.UseAuthorization();
 // --------------------
 // Endpoints
 // --------------------
-app.MapPost("/api/documents/upload", async (
-    IFormFile file,
-    string tenantId,
-    string role,
-    UploadDocumentHandler handler) =>
+//app.MapPost("/api/documents/upload", async (
+//    IFormFile file,
+//    string tenantId,
+//    string role,
+//    UploadDocumentHandler handler) =>
+//{
+//    var content = FileTextExtractor.Extract(file);
+
+//    await handler.HandleAsync(new UploadDocumentCommand(
+//        tenantId,
+//        role,
+//        file.FileName,
+//        content));
+
+//    return Results.Ok();
+//});
+
+//app.MapPost("/api/ask", async (
+//    AskQuestionQuery query,
+//    AskQuestionHandler handler) =>
+//{
+//    var answer = await handler.HandleAsync(query);
+//    return Results.Ok(answer);
+//});
+
+using (var scope = app.Services.CreateScope())
 {
-    var content = FileTextExtractor.Extract(file);
-
-    await handler.HandleAsync(new UploadDocumentCommand(
-        tenantId,
-        role,
-        file.FileName,
-        content));
-
-    return Results.Ok();
-});
-
-app.MapPost("/api/ask", async (
-    AskQuestionQuery query,
-    AskQuestionHandler handler) =>
-{
-    var answer = await handler.HandleAsync(query);
-    return Results.Ok(answer);
-});
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        if (context.Database.IsNpgsql())
+        {
+            context.Database.Migrate();
+        }
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+        await AppDbContextSeed.SeedDefaultAsync(context, userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+        throw;
+    }
+}
 
 app.Run();

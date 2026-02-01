@@ -23,30 +23,30 @@ namespace CompanyAssistant.Application.UseCases
             _vector = vector;
         }
 
-        public async Task HandleAsync(UploadDocumentCommand cmd)
-        {
-            var document = new Document(
-                Guid.NewGuid(),
-                cmd.TenantId,
-                cmd.Role,
-                cmd.Title);
+        //public async Task HandleAsync(UploadDocumentCommand cmd)
+        //{
+        //    var document = new Document(
+        //        Guid.NewGuid(),
+        //        cmd.TenantId,
+        //        cmd.Role,
+        //        cmd.Title);
 
-            var chunks = cmd.Content.Chunk(500);
+        //    var chunks = cmd.Content.Chunk(500);
 
-            foreach (var chunkText in chunks)
-            {
-                var chunk = new DocumentChunk(
-                    Guid.NewGuid(),
-                    document.Id,
-                    new string(chunkText));
+        //    foreach (var chunkText in chunks)
+        //    {
+        //        var chunk = new DocumentChunk(
+        //            Guid.NewGuid(),
+        //            document.Id,
+        //            new string(chunkText));
 
-                document.AddChunk(chunk);
+        //        document.AddChunk(chunk);
 
-                var embedding = await _embed.EmbedAsync(chunk.Content);
-                await _vector.StoreAsync(chunk.Id, embedding, cmd.TenantId);
-            }
+        //        var embedding = await _embed.EmbedAsync(chunk.Content);
+        //        await _vector.StoreAsync(chunk.Id, embedding, cmd.TenantId);
+        //    }
 
-            await _repo.AddAsync(document);
-        }
+        //    await _repo.AddAsync(document);
+        //}
     }
 }

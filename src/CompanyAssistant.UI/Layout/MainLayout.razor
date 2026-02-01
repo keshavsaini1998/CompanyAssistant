@@ -6,15 +6,20 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <!-- Top AppBar -->
-    <MudAppBar Color="Color.Primary" Elevation="1">
-        <MudText Typo="Typo.h6">Company Assistant</MudText>
-    </MudAppBar>
+    <AuthorizeView>
+        <Authorized>
+            <!-- Top AppBar -->
+            <MudAppBar Color="Color.Primary" Elevation="1">
+                <MudText Typo="Typo.h6">Company Assistant</MudText>
+            </MudAppBar>
 
-    <!-- Sidebar / Drawer -->
-    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Elevation="1">
-        <NavMenu/>
-    </MudDrawer>
+            <!-- Sidebar / Drawer -->
+            <MudDrawer Open="true" ClipMode="DrawerClipMode.Always" Elevation="1">
+                <NavMenu />
+            </MudDrawer>
+        </Authorized>
+    </AuthorizeView>
+
 
     <!-- Main content -->
     <MudMainContent>
