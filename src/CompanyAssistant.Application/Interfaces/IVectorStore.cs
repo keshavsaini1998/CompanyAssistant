@@ -1,8 +1,10 @@
-﻿namespace CompanyAssistant.Application.Interfaces
+﻿using CompanyAssistant.Application.Vector;
+
+namespace CompanyAssistant.Application.Interfaces
 {
     public interface IVectorStore
     {
-        Task StoreAsync(Guid chunkId, float[] vector, string tenantId);
-        Task<List<Guid>> SearchAsync(float[] vector, string tenantId, int topK);
+        Task StoreAsync(string content, Guid projectId);
+        Task<List<VectorDocument>> SearchAsync(string query, Guid projectId);
     }
 }

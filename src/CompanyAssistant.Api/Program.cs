@@ -121,7 +121,7 @@ builder.Services.AddScoped<IDocumentRepository, EfDocumentRepository>();
 // --------------------
 // Application Use Cases
 // --------------------
-builder.Services.AddScoped<UploadDocumentHandler>();
+builder.Services.AddScoped<UploadProjectDataHandler>();
 builder.Services.AddScoped<AskQuestionHandler>();
 builder.Services.AddScoped<LoginCommandHandler>();
 

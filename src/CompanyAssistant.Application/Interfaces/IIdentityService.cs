@@ -4,5 +4,6 @@
     {
         Task<Guid?> ValidateUserAsync(string username, string password);
         Task<string> GenerateJwtAsync(Guid userId);
+        Task<bool> HasProjectAccess(Guid userId, Guid projectId);
     }
 }

@@ -10,6 +10,7 @@ namespace CompanyAssistant.Infrastructure.Persistence
         public AppDbContext(DbContextOptions<AppDbContext> opts) : base(opts) { }
         public DbSet<Tenant> Tenants => Set<Tenant>();
         public DbSet<Project> Projects => Set<Project>();
+        public DbSet<UserProject> UserProjects => Set<UserProject>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

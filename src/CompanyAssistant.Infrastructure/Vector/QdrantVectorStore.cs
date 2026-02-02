@@ -1,38 +1,80 @@
 ﻿using CompanyAssistant.Application.Interfaces;
-using System.Net.Http.Json;
-using System.Text.Json;
+using CompanyAssistant.Application.Vector;
+using Qdrant.Client;
+using Qdrant.Client.Grpc;
 
 namespace CompanyAssistant.Infrastructure.Vector
 {
     public class QdrantVectorStore : IVectorStore
     {
-        private readonly HttpClient _http;
-        public QdrantVectorStore(HttpClient http) => _http = http;
+        private readonly IEmbeddingService _embedding;
+        private readonly IQdrantClient _client;
+        private const string CollectionName = "companyassistant";
 
-        public async Task StoreAsync(Guid chunkId, float[] vector, string tenantId)
+        public QdrantVectorStore(IEmbeddingService embedding, IQdrantClient client)
         {
-            await _http.PutAsJsonAsync("/collections/company_chunks/points", new
-            {
-                points = new[] { new { id = chunkId, vector, payload = new { tenantId } } }
-            });
+            _embedding = embedding;
+            _client = client;
         }
 
-        public async Task<List<Guid>> SearchAsync(float[] vector, string tenantId, int topK)
-        {
-            var res = await _http.PostAsJsonAsync("/collections/company_chunks/points/search", new
-            {
-                vector,
-                limit = topK,
-                filter = new
-                {
-                    must = new[] { new { key = "tenantId", match = new { value = tenantId } } }
-                }
-            });
 
-            var json = await res.Content.ReadFromJsonAsync<JsonElement>();
-            return json.GetProperty("result")
-                       .EnumerateArray()
-                       .Select(x => Guid.Parse(x.GetProperty("id").GetString()!)).ToList();
+        public async Task StoreAsync(string content, Guid projectId)
+        {
+            var vector = await _embedding.EmbedAsync(content);
+
+            var point = new PointStruct
+            {
+                Id = new PointId
+                {
+                    Uuid = Guid.NewGuid().ToString()
+                },
+                Vectors = vector,
+                Payload =
+                {
+                    ["content"] = content,
+                    ["projectId"] = projectId.ToString()
+                }
+            };
+
+            await _client.UpsertAsync(CollectionName, new[] { point });
+        }
+
+
+        public async Task<List<VectorDocument>> SearchAsync(string query, Guid projectId)
+        {
+            var vector = await _embedding.EmbedAsync(query);
+
+            var filter = new Filter
+            {
+                Must =
+            {
+                new Condition
+                {
+                    Field = new FieldCondition
+                    {
+                        Key = "projectId",
+                        Match = new Match
+                        {
+                            Keyword = projectId.ToString()
+                        }
+                    }
+                }
+            }
+            };
+
+            var results = await _client.SearchAsync(
+                CollectionName,
+                vector,
+                limit: 5,
+                filter: filter
+            );
+
+
+            return results.Select(r => new VectorDocument
+            {
+                Content = r.Payload["content"].StringValue,
+                ProjectId = projectId
+            }).ToList();
         }
     }
 }
