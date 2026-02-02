@@ -60,7 +60,8 @@ namespace CompanyAssistant.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    TenantId = table.Column<Guid>(type: "uuid", nullable: false)
+                    TenantId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DatabaseConnection = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,6 +78,18 @@ namespace CompanyAssistant.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tenants", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserProjects",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProjectId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProjects", x => new { x.UserId, x.ProjectId });
                 });
 
             migrationBuilder.CreateTable(
@@ -246,6 +259,9 @@ namespace CompanyAssistant.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tenants");
+
+            migrationBuilder.DropTable(
+                name: "UserProjects");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

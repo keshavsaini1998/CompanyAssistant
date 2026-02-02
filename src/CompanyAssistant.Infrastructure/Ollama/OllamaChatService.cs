@@ -11,7 +11,7 @@ namespace CompanyAssistant.Infrastructure.Ollama
 
         public async Task<string> AskAsync(string prompt)
         {
-            var res = await _http.PostAsJsonAsync("/api/generate", new
+            var res = await _http.PostAsJsonAsync("http://localhost:11434/api/generate", new
             {
                 model = "llama3.2:3b",
                 prompt,

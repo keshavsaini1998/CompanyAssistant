@@ -16,8 +16,8 @@ namespace CompanyAssistant.Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
 
-            //builder.Entity<ProjectMembership>()
-            //    .HasKey(x => new { x.UserId, x.ProjectId });
+            builder.Entity<UserProject>()
+                .HasKey(x => new { x.UserId, x.ProjectId });
         }
     }
 

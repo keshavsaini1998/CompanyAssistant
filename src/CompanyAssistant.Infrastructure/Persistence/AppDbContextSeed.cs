@@ -15,7 +15,7 @@ public static class AppDbContextSeed
     {
         if (!context.Tenants.Any())
         {
-            Tenant tenant = new Tenant() { Id = Guid.NewGuid(), Name = "Codinova Technologies" };
+            Tenant tenant = new Tenant() { Id = Guid.NewGuid(), Name = "CompanyName" };
             context.Tenants.Add(tenant);
             await context.SaveChangesAsync();
 
@@ -44,8 +44,12 @@ public static class AppDbContextSeed
 
             if (!context.Projects.Any())
             {
-                context.Projects.Add(new Project() { Id = Guid.NewGuid(), Name = "ZenegyTime", TenantId = tenant.Id });
-                context.Projects.Add(new Project() { Id = Guid.NewGuid(), Name = "SYU", TenantId = tenant.Id });
+                var ecommerce = context.Projects.Add(new Project() { Id = Guid.NewGuid(), Name = ProjectNames.ECommerce, TenantId = tenant.Id, DatabaseConnection= "Host=localhost;Port=5432;Username=postgres;Password=a123456!;Database=E-Commerce;" });
+                var clinic = context.Projects.Add(new Project() { Id = Guid.NewGuid(), Name = ProjectNames.Clinic, TenantId = tenant.Id, DatabaseConnection = "Host=localhost;Port=5432;Username=postgres;Password=a123456!;Database=Clinic;" });
+                await context.SaveChangesAsync();
+
+                context.UserProjects.Add(new UserProject() { UserId = administrator.Id, ProjectId = ecommerce.Entity.Id });
+                context.UserProjects.Add(new UserProject() { UserId = administrator.Id, ProjectId = clinic.Entity.Id });
                 await context.SaveChangesAsync();
             }
         }

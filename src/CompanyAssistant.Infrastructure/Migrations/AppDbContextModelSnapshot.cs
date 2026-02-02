@@ -28,6 +28,10 @@ namespace CompanyAssistant.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("DatabaseConnection")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -53,6 +57,19 @@ namespace CompanyAssistant.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("CompanyAssistant.Domain.Entities.UserProject", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "ProjectId");
+
+                    b.ToTable("UserProjects");
                 });
 
             modelBuilder.Entity("CompanyAssistant.Infrastructure.Identity.AppRole", b =>

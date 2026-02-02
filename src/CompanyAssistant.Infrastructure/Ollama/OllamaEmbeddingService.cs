@@ -11,7 +11,7 @@ namespace CompanyAssistant.Infrastructure.Ollama
 
         public async Task<float[]> EmbedAsync(string text)
         {
-            var res = await _http.PostAsJsonAsync("/api/embeddings", new
+            var res = await _http.PostAsJsonAsync("http://localhost:11434/api/embeddings", new
             {
                 model = "nomic-embed-text",
                 prompt = text

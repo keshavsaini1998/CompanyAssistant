@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Qdrant.Client;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -116,7 +117,13 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IEmbeddingService, OllamaEmbeddingService>();
 builder.Services.AddScoped<IChatService, OllamaChatService>();
 builder.Services.AddScoped<IVectorStore, QdrantVectorStore>();
-builder.Services.AddScoped<IDocumentRepository, EfDocumentRepository>();
+builder.Services.AddScoped<ISqlReader, SqlReader>();
+builder.Services.AddSingleton<IQdrantClient>(_ =>
+    new QdrantClient(
+        host: "localhost",
+        port: 6334 // gRPC port, NOT 6333
+    )
+);
 
 // --------------------
 // Application Use Cases
@@ -148,33 +155,6 @@ app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// --------------------
-// Endpoints
-// --------------------
-//app.MapPost("/api/documents/upload", async (
-//    IFormFile file,
-//    string tenantId,
-//    string role,
-//    UploadDocumentHandler handler) =>
-//{
-//    var content = FileTextExtractor.Extract(file);
-
-//    await handler.HandleAsync(new UploadDocumentCommand(
-//        tenantId,
-//        role,
-//        file.FileName,
-//        content));
-
-//    return Results.Ok();
-//});
-
-//app.MapPost("/api/ask", async (
-//    AskQuestionQuery query,
-//    AskQuestionHandler handler) =>
-//{
-//    var answer = await handler.HandleAsync(query);
-//    return Results.Ok(answer);
-//});
 
 using (var scope = app.Services.CreateScope())
 {
@@ -196,6 +176,12 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while migrating or seeding the database.");
         throw;
     }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var qdrant = scope.ServiceProvider.GetRequiredService<IQdrantClient>();
+    await QdrantInitializer.EnsureCreated(qdrant);
 }
 
 app.Run();

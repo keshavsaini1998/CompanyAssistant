@@ -18,25 +18,25 @@ namespace CompanyAssistant.Infrastructure.Vector
         }
 
 
-        public async Task StoreAsync(string content, Guid projectId)
+        public async Task StoreAsync(IEnumerable<VectorDocument> docs)
         {
-            var vector = await _embedding.EmbedAsync(content);
-
-            var point = new PointStruct
+            foreach (var d in docs)
             {
-                Id = new PointId
-                {
-                    Uuid = Guid.NewGuid().ToString()
-                },
-                Vectors = vector,
-                Payload =
-                {
-                    ["content"] = content,
-                    ["projectId"] = projectId.ToString()
-                }
-            };
+                var vector = await _embedding.EmbedAsync(d.Content);
 
-            await _client.UpsertAsync(CollectionName, new[] { point });
+                var point = new PointStruct
+                {
+                    Id = new PointId(Guid.Parse(d.Id)),
+                    Vectors = vector,
+                    Payload =
+                    {
+                        ["projectId"] = d.ProjectId,
+                        ["entity"] = d.Entity,
+                        ["text"] = d.Content
+                    }
+                };
+                await _client.UpsertAsync(CollectionName, new[] { point });
+            }
         }
 
 
@@ -72,8 +72,10 @@ namespace CompanyAssistant.Infrastructure.Vector
 
             return results.Select(r => new VectorDocument
             {
-                Content = r.Payload["content"].StringValue,
-                ProjectId = projectId
+                Id = r.Id?.Uuid.ToString(),
+                ProjectId = projectId.ToString(),
+                Entity = r.Payload.TryGetValue("entity", out var e) ? e.StringValue : null,
+                Content = r.Payload.TryGetValue("text", out var c) ? c.StringValue : null
             }).ToList();
         }
     }

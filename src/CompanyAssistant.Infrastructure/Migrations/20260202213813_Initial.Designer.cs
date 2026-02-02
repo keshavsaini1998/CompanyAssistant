@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CompanyAssistant.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260126223006_Initial")]
+    [Migration("20260202213813_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -30,6 +30,10 @@ namespace CompanyAssistant.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("DatabaseConnection")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -56,6 +60,19 @@ namespace CompanyAssistant.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("CompanyAssistant.Domain.Entities.UserProject", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "ProjectId");
+
+                    b.ToTable("UserProjects");
                 });
 
             modelBuilder.Entity("CompanyAssistant.Infrastructure.Identity.AppRole", b =>

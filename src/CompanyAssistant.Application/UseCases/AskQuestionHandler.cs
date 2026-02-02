@@ -2,57 +2,51 @@
 
 namespace CompanyAssistant.Application.UseCases
 {
-    public record AskQuestionQuery(
-    string Question,
-    string TenantId,
-    string Role);
+    public record AskQuestionCommand(Guid UserId, Guid ProjectId, string Question);
     public class AskQuestionHandler
     {
-        private readonly IEmbeddingService _embed;
+        private readonly IIdentityService _identity;
         private readonly IVectorStore _vector;
-        private readonly IDocumentRepository _repo;
         private readonly IChatService _chat;
 
         public AskQuestionHandler(
-            IEmbeddingService embed,
+            IIdentityService identity,
             IVectorStore vector,
-            IDocumentRepository repo,
             IChatService chat)
         {
-            _embed = embed;
+            _identity = identity;
             _vector = vector;
-            _repo = repo;
             _chat = chat;
         }
 
-//        public async Task<string> HandleAsync(AskQuestionQuery query)
-//        {
-//            var qVector = await _embed.EmbedAsync(query.Question);
+        public async Task<string> Handle(AskQuestionCommand cmd)
+        {
+            if (!await _identity.HasProjectAccess(cmd.UserId, cmd.ProjectId))
+                throw new UnauthorizedAccessException();
 
-//            var chunkIds = await _vector.SearchAsync(
-//                qVector,
-//                query.TenantId,
-//                topK: 5);
 
-//            var chunks = await _repo.GetAuthorizedChunksAsync(
-//                chunkIds,
-//                query.Role);
+            var docs = await _vector.SearchAsync(cmd.Question, cmd.ProjectId);
 
-//            if (!chunks.Any())
-//                return "I don't know";
 
-//            var prompt = $"""
-//You are a company assistant.
-//Answer ONLY from the context below.
+            var context = string.Join("\n", docs.Select(d => d.Content));
 
-//Context:
-//{string.Join("\n---\n", chunks)}
 
-//Question:
-//{query.Question}
-//""";
+            var prompt = $"""
+You are a company assistant.
+Answer ONLY from the context.
+If the answer is not present, say 'I don’t know'.
 
-//            return await _chat.AskAsync(prompt);
-//        }
+
+Context:
+{context}
+
+
+Question:
+{cmd.Question}
+""";
+
+
+            return await _chat.AskAsync(prompt);
+        }
     }
 }
